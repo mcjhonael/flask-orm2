@@ -15,7 +15,11 @@ class RecetaModel(base_de_datos.Model):
     recetaNombre=Column(name='nombre',type_=types.String(length=255),nullable=True)
     
     recetaPorcion=Column(name='porcion',type_=types.Enum(EnumPorcion))
+    
 
+    # aqui se van almacenar todas las preparacion de dicha receta que yo ando buscando
+    # yo desde mi tabla receta preparacion puedo acceder a todas las preparaciones
+    # reacuerda que dentro de la tabla preparacion se encuentra un atributo llamado preparacionRecetasz
     preparaciones=orm.relationship('PreparacionModel',backref='preparacionRecetas',lazy=True)
     
     recetas_ingredientes=orm.relationship('RecetaIngredienteModel',backref='recetasIngredienteRecetas',lazy=True)

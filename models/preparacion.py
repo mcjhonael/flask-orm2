@@ -14,5 +14,5 @@ class PreparacionModel(base_de_datos.Model):
     receta=Column(ForeignKey(column='recetas.id' ,ondelete='RESTRICT'), name='recetas_id',type_=types.Integer,nullable=False)
     
     def __str__(self):
-        return f'Mi Preperacion es {self.preparacionOrden}'
+        return f'Mi Preperacion es {self.preparacionDescripcion}'
     

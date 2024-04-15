@@ -1,7 +1,9 @@
 from flask_restful import Resource,reqparse
 from conexion_bd import base_de_datos
 from sqlalchemy.exc import IntegrityError
+
 from models.preparacion import PreparacionModel
+from models.receta import RecetaModel
 
 class PreparacionesController(Resource):
     serializador=reqparse.RequestParser(bundle_errors=True)
@@ -48,21 +50,41 @@ class PreparacionesController(Resource):
 
         except IntegrityError  as err:
             return {
-                "content":None,
+                "content":None, 
                 "message":"receta no existe"
             }
-
+#^OJO CREAMOS UN VINCULO CON RECETA Y PREPARACIONES POR QUE CUANDO YO TENGA LA TABLA PREPARACIONES AHI DEBE SALIR LA LISTA DE PREPARACIONES O LISTA DE PASOS PARA HACER LAS PREPARACIONES INCLUIDO CON SU RECETA A LA CUAL CORRESPONDE 
+# ! Y CUANDO YO LLAME UNA RECETA ESTA DEBE MOSTRARME TBM LA LISTA DE PREPARACIONES QUE YO DEBO SEGUIR PARA HACER ESA RECETA ENTENDISTE X ESO SE CREA UNA RELACION DE TIPO ORM.RELATIONSHIP
+# *en el modelo RecetaModel creo una variable ficticia llamada preparaciones la cual va almacenar todas las preparaciones y
 class PreparacionController(Resource):
-    def get(sefl,id):
+    def get(self,id):
         try:
             preparacion=base_de_datos.session.query(PreparacionModel).filter_by(preparacionId=id).first()
-            print(preparacion)
             if preparacion is None:
                 raise Exception("Preparacion no existe")
             preparacionDict=preparacion.__dict__.copy()
             del preparacionDict['_sa_instance_state']
+
+            # esto solo es una prueba amiguitos nada importante pero si
+            print(preparacion.receta)
+
+            recetitas=base_de_datos.session.query(RecetaModel).filter(RecetaModel.recetaId==preparacion.receta).first()
+            recetaEncontrada=recetitas.__dict__.copy()
+            del recetaEncontrada['_sa_instance_state']
+            recetaEncontrada['recetaPorcion']=recetitas.recetaPorcion.value
+
+            json={
+                "id":preparacionDict['preparacionId'],
+                "orden":preparacionDict['preparacionOrden'],
+                "descripcion":preparacionDict['preparacionDescripcion'],
+                "receta":{
+                    "id":recetaEncontrada['recetaId'],
+                    "nombre":recetaEncontrada['recetaNombre'],
+                    "porcion":recetaEncontrada['recetaPorcion']
+                }
+            }
             return {
-                "content":preparacionDict,
+                "content":json,
                 "message":None
             }
         except Exception as err:

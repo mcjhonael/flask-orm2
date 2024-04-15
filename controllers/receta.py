@@ -1,12 +1,14 @@
 from flask_restful import Resource, reqparse
 from conexion_bd import base_de_datos
 from models.receta import RecetaModel
+from models.preparacion import PreparacionModel
 from math import ceil
 
 
 class RecetasController(Resource):
+    # esto si tenemos que instancear fuera xk va ser de manera general a diferencia de los argumentos para los diferentes metodos que se van a usar
     serializador = reqparse.RequestParser()
-
+    # esto indica que estos argumetnos solamente va ser usado dentro de un metodo post nada mas
     def post(self):
         self.serializador.add_argument(
             'nombre',
@@ -103,7 +105,44 @@ class RecetaController(Resource):
     # una preapracion solo tiene 1 receta 
     # creamos un atributo preapraciones que seria el relationship 
     def get(self,id):
-        receta=base_de_datos.session.query(RecetaModel).filter(RecetaModel.recetaId==id).first()
+        try:
+            receta=base_de_datos.session.query(RecetaModel).filter(RecetaModel.recetaId==id).first()
+            # print(receta.preparaciones)
+            if receta is None:
+                raise Exception("Receta no se encuentra")
+            
+            diccionario_receta=receta.__dict__.copy()
+            del diccionario_receta["_sa_instance_state"]
+            diccionario_receta['recetaPorcion']=receta.recetaPorcion.value
+                
+                # esto me devuelve todo el registro de recetas y los ingredientes
+            # print(receta.recetas_ingredientes[0].recetaIngredienteIngredientes)
 
-        print(receta.recetaNombre)
-        print(receta.preparaciones)
+
+            diccionario_receta['preparaciones']=[]
+
+            for preparacion in receta.preparaciones:
+                diccionario_preparacion=preparacion.__dict__.copy()
+                del diccionario_preparacion['_sa_instance_state']
+                diccionario_receta['preparaciones'].append(diccionario_preparacion)
+                # print(diccionario_receta)
+
+            for receta_ingrediente in receta.recetas_ingredientes:
+                diccionario_receta_ingrediente=receta_ingrediente.__dict__.copy()
+                del diccionario_receta_ingrediente['_sa_instance_state']
+                # print(diccionario_receta_ingrediente)
+                diccionario_receta_ingrediente['ingrediente']=receta_ingrediente.recetaIngredienteIngredientes.__dict__H
+                del diccionario_receta_ingrediente['ingrediente']['_sa_instance_state']
+                print(receta_ingrediente.recetaIngredienteIngredientes)
+
+            return {
+                "content":diccionario_receta,
+                "message":""
+            },200
+
+        except Exception as err:
+            return{
+                "content":None,
+                "message":err.args[0]
+            },404
+        
