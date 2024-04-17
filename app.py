@@ -1,10 +1,5 @@
 from flask import Flask
-from dotenv import load_dotenv
-from os import environ
 from conexion_bd import base_de_datos
-from flask_cors import CORS
-from flask_migrate import Migrate
-from flask_restful import Api
 
 #import models
 from models.ingrediente import IngredienteModel
@@ -21,11 +16,38 @@ from controllers.receta import RecetasController,RecetaController
 from controllers.preparacion import PreparacionesController,PreparacionController
 
 from controllers.receta_ingrediente import RecetaIngredienteController
+
+
+from dotenv import load_dotenv
+from os import environ
+from flask_cors import CORS
+from flask_migrate import Migrate
+from flask_restful import Api
+from flask_swagger_ui import get_swaggerui_blueprint
+
+
 load_dotenv()
+
+# es una ruta standar para nuestras api siempre usar eso
+SWAGGER_URL = '/api/docs' 
+# ruta donde se encuentra mi archivo swagger.json
+API_URL='./static/swagger.json'
+
+swaggerui_blueprint=get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name':'Resposteria Flask - Documentacion Swagger'
+    }
+)
+
 
 app = Flask(__name__)
 
+# blueprint = sirve para registar en el caso de nosotros tengamos un proyecto internoy queramos agregarlo al proyecto principal de Flask como microservicios 
+app.register_blueprint(swaggerui_blueprint)
 
+# con origins indicamos que pagina puede acceder a nuestra api x ejemplo http://pacolo.com solo el puede acceder a nuestra api nadie mas. los methods que se puede consultar en la api
 CORS(app=app,methods=['GET','POST','PUT','DELETE'],origins='*',allow_headers='*')
 
 api=Api(app)
@@ -71,3 +93,8 @@ def initial_controller():
 if __name__ == '__main__':
 
     app.run(port=2000, debug=True)
+# https://www.apimatic.io/ se encarga de transformar nuestro archivo postman que fue exportado a un archivo swagger 
+#  dentro de apimatic vamos a transform API y cargamos el archivo para ello lo cargamos y despues no debe salir OpenAPI/Swagger v2.0(JSON)
+# y nos va descargar un archivo swagger 
+# https://editor.swagger.io/ esta pagina sirve para editar nuestro archivo swagger por algyunas cosas que faltan editor en linea swagger
+# lo arrastramos y empezamos a editar

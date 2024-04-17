@@ -1,0 +1,14 @@
+-- agregar en info description y de contacto name,email
+-- dentro de los schema tbm add los protocolos http y https
+-- que consume mi api application/json y produce lo mismo
+-- el summary dentro de los metodos indicaria para k sirve cada metodosy de bajo una description tbm para saber que hace ese metodo
+-- tags indica que pertenece al mismo bloque creado
+-- deprecated = para indicar si ese end point aun sirve o no x eso colocamos true,false
+-- #/definition ahi se borra los datos iniciales y tbm a donde bloque corresponde es mejor tenerlo en vacio o en 0 
+-- recuerda que la ruta es http y no https
+--una vez corregido vamos a file>save as json = me va descargar un archivo swagger.json 
+-- decargamos el archivo y lo colocamos en la carpeta static para que se pueda renderizar xk esa es la carpeta de renderizado de js css html y json
+-- libreria que nos permite subir nuestro swagger pip install flask-swagger-ui
+-- luego agregamos sus valores de la doc de flask swaggerui
+-- entramos a una cuenta de heroku para deployar nuestro api
+-- new > y creamos nuestro espacio para subir nuestro api

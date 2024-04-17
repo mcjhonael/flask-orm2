@@ -126,15 +126,18 @@ class RecetaController(Resource):
                 del diccionario_preparacion['_sa_instance_state']
                 diccionario_receta['preparaciones'].append(diccionario_preparacion)
                 # print(diccionario_receta)
-
+            diccionario_receta['ingredientes']=[]
             for receta_ingrediente in receta.recetas_ingredientes:
                 diccionario_receta_ingrediente=receta_ingrediente.__dict__.copy()
                 del diccionario_receta_ingrediente['_sa_instance_state']
-                # print(diccionario_receta_ingrediente)
-                diccionario_receta_ingrediente['ingrediente']=receta_ingrediente.recetaIngredienteIngredientes.__dict__H
-                del diccionario_receta_ingrediente['ingrediente']['_sa_instance_state']
-                print(receta_ingrediente.recetaIngredienteIngredientes)
 
+                diccionario_receta_ingrediente['ingrediente']=receta_ingrediente.recetaIngredienteIngredientes.__dict__.copy()
+                # lo elinamos de esta por que dentro de la ingrediente se esta creando esa variable _sa_instance_state
+                del diccionario_receta_ingrediente['ingrediente']['_sa_instance_state']
+                print(diccionario_receta_ingrediente)
+
+                diccionario_receta['ingredientes'].append(diccionario_receta_ingrediente)
+            # print(receta_ingrediente)
             return {
                 "content":diccionario_receta,
                 "message":""

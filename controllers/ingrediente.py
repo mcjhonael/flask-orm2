@@ -129,13 +129,20 @@ class IngredienteController(Resource):
         },201
     def delete(self,id):
         # base_de_datos.session.query(IngredienteModel).filter(IngredienteModel.ingredienteId==id).delete()
-        ingrediente=base_de_datos.session.query(IngredienteModel).filter(IngredienteModel.ingredienteId==id).first()
-        base_de_datos.session.delete(ingrediente)
-        base_de_datos.session.commit()
-        return {
-            "message":"Ingrediente eliminado",
-            "content":None
-        },204
+        # entonces siempre debemos usar un try catch cuando hagamos crud siempreeeeeee
+        try:
+            ingrediente=base_de_datos.session.query(IngredienteModel).filter(IngredienteModel.ingredienteId==id).first()
+            base_de_datos.session.delete(ingrediente)
+            base_de_datos.session.commit()
+            return {
+                "message":"Ingrediente eliminado",
+                "content":None
+            },204
+        except:
+            return {
+                "content":None,
+                "message":"Error al eliminar el ingrediente"
+            },500
 
 serializadorFiltro=reqparse.RequestParser()
 serializadorFiltro.add_argument(

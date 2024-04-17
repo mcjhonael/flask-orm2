@@ -1,0 +1,499 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Mi primer API usando base de datos",
+    "version": "1.0",
+    "title": "flask_reposteria_ruth",
+    "contact": {
+      "email": "mc.jhonael@gmail.com",
+      "name": "jhonatan maquera"
+    }
+  },
+  "host": "127.0.0.1:2000",
+  "basePath": "/",
+  "securityDefinitions": {},
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/ingredientes": {
+      "get": {
+        "summary": "/ingredientes",
+        "tags": [
+          "ingrediente"
+        ],
+        "operationId": "/ingredientes",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      },
+      "post": {
+        "summary": "Metodo para crear ingrediente",
+        "description": "Metodo que sirve para crear un ingrediente de tipo string",
+        "tags": [
+          "ingrediente"
+        ],
+        "operationId": "Post/ingredientes",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "informacion para ingresar el nuevo ingrediente",
+            "schema": {
+              "$ref": "#/definitions/~1ingredientesrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/ingrediente/{id}": {
+      "put": {
+        "summary": "/ingrediente/:id",
+        "tags": [
+          "ingrediente"
+        ],
+        "operationId": "/ingrediente/:id",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/~1ingrediente~1%3Aidrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      },
+      "get": {
+        "summary": "/ingrediente/:id",
+        "tags": [
+          "ingrediente"
+        ],
+        "operationId": "Get/ingrediente/:id",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "summary": "/ingrediente/:id",
+        "tags": [
+          "ingrediente"
+        ],
+        "operationId": "/ingrediente/:id1",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/buscar_ingrediente": {
+      "get": {
+        "summary": "/buscar_ingrediente",
+        "tags": [
+          "ingrediente"
+        ],
+        "operationId": "/buscar_ingrediente",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nombre",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/recetas": {
+      "post": {
+        "summary": "/recetas",
+        "tags": [
+          "receta"
+        ],
+        "operationId": "/recetas",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/~1recetasrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      },
+      "get": {
+        "summary": "/recetas",
+        "tags": [
+          "receta"
+        ],
+        "operationId": "Get/recetas",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/receta/{id}": {
+      "get": {
+        "summary": "/receta/:id",
+        "tags": [
+          "receta"
+        ],
+        "operationId": "/receta/:id",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/preparaciones": {
+      "post": {
+        "summary": "/preparacion",
+        "tags": [
+          "preparacion"
+        ],
+        "operationId": "/preparacion",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/~1preparacionrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/preparacion/{id}": {
+      "get": {
+        "summary": "/preparacion/:id",
+        "tags": [
+          "preparacion"
+        ],
+        "operationId": "/preparacion/:id",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/recetas_ingredientes": {
+      "post": {
+        "summary": "/receta_ingrediente",
+        "tags": [
+          "receta_ingrediente"
+        ],
+        "operationId": "/receta_ingrediente",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/~1receta_ingrediente_request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "/ingredientesrequest": {
+      "title": "/ingredientesrequest",
+      "example": {
+        "nombre": ""
+      },
+      "type": "object",
+      "properties": {
+        "nombre": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "nombre"
+      ]
+    },
+    "/ingrediente/:idrequest": {
+      "title": "/ingrediente/:idrequest",
+      "example": {
+        "nombre": ""
+      },
+      "type": "object",
+      "properties": {
+        "nombre": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "nombre"
+      ]
+    },
+    "/recetasrequest": {
+      "title": "/recetasrequest",
+      "example": {
+        "nombre": "",
+        "porcion": ""
+      },
+      "type": "object",
+      "properties": {
+        "nombre": {
+          "type": "string"
+        },
+        "porcion": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "nombre",
+        "porcion"
+      ]
+    },
+    "/preparacionrequest": {
+      "title": "/preparacionrequest",
+      "example": {
+        "orden": 0,
+        "descripcion": "",
+        "receta_id": 0
+      },
+      "type": "object",
+      "properties": {
+        "orden": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "descripcion": {
+          "type": "string"
+        },
+        "receta_id": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "orden",
+        "descripcion",
+        "receta_id"
+      ]
+    },
+    "/receta_ingrediente_request": {
+      "title": "/receta_ingrediente_request",
+      "example": {
+        "receta_id": 0,
+        "ingrediente_id": [
+          0
+        ],
+        "cantidad": ""
+      },
+      "type": "object",
+      "properties": {
+        "receta_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ingrediente_id": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "cantidad": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "receta_id",
+        "ingrediente_id",
+        "cantidad"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "ingrediente"
+    },
+    {
+      "name": "receta"
+    },
+    {
+      "name": "preparacion"
+    },
+    {
+      "name": "receta_ingrediente"
+    }
+  ]
+}
