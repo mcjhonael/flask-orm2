@@ -13,3 +13,13 @@
 -- entramos a una cuenta de heroku para deployar nuestro api
 -- new > y creamos nuestro espacio para subir nuestro api
 -- para los adicionales tenemos que tener un archivo runtime.txt para establecer la version del lenguaje
+-- nos sale un error en heroku Application error y que usemos heroku cli  
+-- luego entramos a consola para ver si tenemos heroku --version
+--heroku login y presionas cualquier boton
+--heroku logs --app name-proyecto
+-- heroku solo sube el proyecto pero nosotros debemos decirle que archivo es el que va subir xk hay muchos ese es el error H14 
+-- para ello creamos un archivo uwsgi.ini = este archivo se encarga de decirle a heroku cual proceso web debe seguir 
+-- recuerda que flask corre en los servidor uwsgi por lo cual en el archivo uwsgi.ini le colocamos eso [uwsgi] python corre en servidor de tipo uwsgi 
+-- cual va ser nuestro puerto que vamos usar en nuestro proyecto que para eso diremos que nos de mejor el mismo heroku http-socket=:$(PORT) en esa variable heroku almanecera el puerto que nos va signar a nuestro proyecto
+-- y el module=app:app levanta del modulo app el archivo app el 2do es el archivo k keremos levantar en nuestro puerto 
+--luego creamo el archivo Profile sin extension sirve para darle configuracion a mi proyecto de heroku  web: uwsgi uwsgi.ini le decimos heroku este es un servidor de tipo web usamos un tipo uwsgi y toda la configuracion se encuentrra en el archivo uwsgi.ini
