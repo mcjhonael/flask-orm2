@@ -23,3 +23,8 @@
 -- cual va ser nuestro puerto que vamos usar en nuestro proyecto que para eso diremos que nos de mejor el mismo heroku http-socket=:$(PORT) en esa variable heroku almanecera el puerto que nos va signar a nuestro proyecto
 -- y el module=app:app levanta del modulo app el archivo app el 2do es el archivo k keremos levantar en nuestro puerto 
 --luego creamo el archivo Profile sin extension sirve para darle configuracion a mi proyecto de heroku  web: uwsgi uwsgi.ini le decimos heroku este es un servidor de tipo web usamos un tipo uwsgi y toda la configuracion se encuentrra en el archivo uwsgi.ini
+
+-- y hacemos un commit y push
+--ahora en la la cmd de heroku colocamos 
+heroku logs --app repos-jhonael --tail = tail indicara que va escuchar todo lo que pase con la aplicacion los error y etc
+-- por ultimo en la lista de requerements colocamos solo escribir la libreia uwsgi y ya
