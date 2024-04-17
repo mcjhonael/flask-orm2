@@ -12,3 +12,4 @@
 -- luego agregamos sus valores de la doc de flask swaggerui
 -- entramos a una cuenta de heroku para deployar nuestro api
 -- new > y creamos nuestro espacio para subir nuestro api
+-- para los adicionales tenemos que tener un archivo runtime.txt para establecer la version del lenguaje
