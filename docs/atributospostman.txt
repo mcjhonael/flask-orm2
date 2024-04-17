@@ -28,3 +28,8 @@
 --ahora en la la cmd de heroku colocamos 
 heroku logs --app repos-jhonael --tail = tail indicara que va escuchar todo lo que pase con la aplicacion los error y etc
 -- por ultimo en la lista de requerements colocamos solo escribir la libreia uwsgi y ya
+
+-- hay servidores que si te dan alojamiento a base de datos y otros que no x ejemplo hay diferencia entre tu backend y tu base de datos ojo heroku tbm tiene para almacenar base de datos 
+-- heroku nos muestra todos los completos quer nos ayudan a k nuestra aplicacion funcione de manera correcta  Resource > find more add-ons y en la categorias buscamos Data Stores si sirven para almacenar informacion  para esteproyecto usamos el de Jaws DB MySQL que contrataremos este servicio  ya una ves que estemos dentro entonces aremos lo siguiente contratamos el modo free y lo instalamos 
+-- entramos dentro de esa aplicacion y cogemos las variables de configuracion k tiene y esas vriables debemos colocarlo en dentro de settings>config vars Y LISTO AGREGAR 
+>heroku config:set ENV=production  --app repos-jhonael esto colocar en la consola de heroku
