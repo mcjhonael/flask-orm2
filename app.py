@@ -31,7 +31,7 @@ load_dotenv()
 # es una ruta standar para nuestras api siempre usar eso
 SWAGGER_URL = '/api/docs' 
 # ruta donde se encuentra mi archivo swagger.json
-API_URL='./static/swagger.json'
+API_URL='/static/swagger.json'
 
 swaggerui_blueprint=get_swaggerui_blueprint(
     SWAGGER_URL,
