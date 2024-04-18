@@ -53,7 +53,7 @@ CORS(app=app,methods=['GET','POST','PUT','DELETE'],origins='*',allow_headers='*'
 api=Api(app)
 
 # area de configuracion de la base de datos
-app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('SQLALCHEMY_DATABASE_URI')
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # area de inicializara la db
