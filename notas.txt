@@ -29,4 +29,4 @@
 9. creación de la lógica ósea los controladores para ello usaremos la librería 
 	9.1. pip install flask-restful
 	9.2. realizamos CRUD,PAGINACION,BUSCADOR
-	9.3. from flask_restful import Resource,reqparse =para poder usar su método directo solo crear la clase y adentro sus métodos con los mismo métodos http x eso Resosurce y reqparse para coger los atributos que enviaremos desde front y tbm hay que usar la conexión ala base de datos por que para sacar datos tendremos que conectarnos ala db siempre 
+	9.3. from flask_restful import Resource,reqparse =para poder usar su método directo solo crear la clase y adentro sus métodos con los mismo métodos http x eso Resosurce y reqparse para coger los atributos que enviaremos desde front y tbm hay que usar la conexión ala base de datos por que para sacar datos tendremos que conectarnos ala db siempre y tbm se usa los modelos importados
