@@ -83,6 +83,7 @@ api.add_resource(RecetasController,'/recetas')
 api.add_resource(RecetaController,'/receta/<int:id>')
 
 api.add_resource(RecetaIngredienteController,'/recetas_ingredientes')
+
 @app.route('/', methods=['GET'])
 def initial_controller():
     return {

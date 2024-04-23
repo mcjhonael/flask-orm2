@@ -1,0 +1,32 @@
+- pip list == lista de librerias
+- pip freeze > requirements.txt == el > indica saca la lista de librerias y colocalo dentro de este archivo requirements.txt
+
+1. crear entorno virtual (py -m venv flask_orm)
+2. instalar flask(pip install flask)
+3. instalar los drives para el SGBD  (pip install Flask-MySQLdb)
+4. crear .env para almacenar variables sencibles (pip install python-dotenv) permite agregar todas las variables que crees dentro de .env y ser visible dentro del ordenador
+4.1. load_dotenv() = método que se encarga de cargar todas las variables del .env a nuestra app
+5. environ = contiene un diccionario de todas las variables de nuestro ordenador
+6. uso de libreria de SQLAlchemy para modelo e inicializar la BD (pip install Flask-SQLAlchemy)
+7. manipulación de tablas (pip install Flask-Migrate)
+	7.0. debemos instanciar la librería flask-sqlalchemy
+7.1. agregar las variables de configuración app.config[‘SQLALCHEMY-DATABAS_URI]=environ.get(‘DATADABSE_URI’)
+	7.2 debemos inicializar la BD(base_de_datos.init_app(app))
+	7.3. crear la tablas Migrate(app=app,db=base_de_datos)
+7.3.1. en consola flask db init – flask db migrate – flask db upgrade siempre usan los 2 ultimos comandos para modificar campos de los modelos
+8. creacion de  modelos 
+	8.1. tablas padres 
+		8.1.1. método __str__ = imprimir modelo amigable
+		8.1.2. __tablename__ = nombre de la tabla
+		8.1.3. todos los padres deben crear el orm.relationship()
+8.1.4. nombre_tabla_hijas=orm.relationship(‘nombre_modelo_hija’,backref=’nombre_tabla_hija_singular_join_nombre de la tabla padre en camelcase’,lazy=true) 
+
+8.2 Tablas hijas
+	8.2.1. creamos las tablas foráneas y su campo correspondiente
+	From sqlalchemy.sql.schema import ForeignKey 
+	8.2.2. nombre_tabla_padre_singular=Column(ForeignKey(column=’tabla_padre.id’,ondelete=’restrict’),name=’nombre_tabla_id,type_=types.Integer’)
+	8.2.3. al final no olvidar declarar los modelos en app.py
+9. creación de la lógica ósea los controladores para ello usaremos la librería 
+	9.1. pip install flask-restful
+	9.2. realizamos CRUD,PAGINACION,BUSCADOR
+	9.3. from flask_restful import Resource,reqparse =para poder usar su método directo solo crear la clase y adentro sus métodos con los mismo métodos http x eso Resosurce y reqparse para coger los atributos que enviaremos desde front y tbm hay que usar la conexión ala base de datos por que para sacar datos tendremos que conectarnos ala db siempre 

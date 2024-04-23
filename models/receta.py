@@ -10,7 +10,7 @@ class EnumPorcion(Enum):
 class RecetaModel(base_de_datos.Model):
     __tablename__="recetas"
 
-    recetaId=Column(name='id',type_=types.Integer ,primary_key=True,autoincrement=True,nullable=False,unique=True)
+    recetaId=Column(name=   'id',type_=types.Integer ,primary_key=True,autoincrement=True,nullable=False,unique=True)
     
     recetaNombre=Column(name='nombre',type_=types.String(length=255),nullable=True)
     
